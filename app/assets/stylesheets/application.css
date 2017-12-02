@@ -12,7 +12,14 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap.min.css
  */
+
+
+.navbar-default {
+    background-color: #dddddd;
+}
+
 
 #container {
     margin: 48px auto;
