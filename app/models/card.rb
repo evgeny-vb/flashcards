@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model responsible for cards
 #
 class Card < ApplicationRecord
