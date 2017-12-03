@@ -1,6 +1,8 @@
 AllCops:
   Excludes:
     - db/**
+    - config/initializers/simple_form.rb
+    - config/initializers/simple_form_bootstrap.rb
 
 Metrics/LineLength:
   Enabled: false

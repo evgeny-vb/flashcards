@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <% flash.each do |key, value| %>
+      <flash class=<%="flash-#{key}"%>>
+        <%= value %>
+      </flash>
+    <% end %>
     <section id="container">
 
       <header class="clearfix">
@@ -19,7 +24,7 @@
             </div>
             <ul class="navbar-nav navigation-links">
               <li class="nav-item"><%= link_to 'Все карточки', cards_path %></li>
-              <li class="nav-item"><%= link_to 'Добавить карточку', '#' %></li>
+              <li class="nav-item"><%= link_to 'Добавить карточку', new_card_path %></li>
             </ul>
           </div>
         </nav>

@@ -1,0 +1,7 @@
+ru:
+  activerecord:
+    attributes:
+      card:
+        original_text: 'Оригинальный текст'
+        translated_text: 'Переведённый текст'
+        review_date: 'Дата пересмотра'
