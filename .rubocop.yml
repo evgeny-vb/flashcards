@@ -1,0 +1,8 @@
+AllCops:
+  Excludes:
+    - db/**
+
+Metrics/LineLength:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
