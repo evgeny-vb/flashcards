@@ -3,7 +3,7 @@
 # Controller responsible for showing and creating cards
 #
 class CardsController < ApplicationController
-  before_action :set_card, only: [:edit, :update, :destroy]
+  before_action :set_card, only: %i[edit update destroy]
 
   def index
     @cards = Card.all.by_review_date
@@ -42,6 +42,7 @@ class CardsController < ApplicationController
   end
 
   private
+
   def set_card
     @card = Card.find(params[:id])
   end
