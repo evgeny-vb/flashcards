@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'open-uri'
+
+url = 'http://1000mostcommonwords.com/1000-most-common-german-words'
+page = Nokogiri::HTML(open(url))
+rows = page.xpath('//*[@id="post-188"]/div/table/tbody/tr[position() > 1]/td[position() > 1]')
+rows.each_slice(2) do |original, translated|
+  Card.create(original_text: original.text, translated_text: translated.text)
+end
