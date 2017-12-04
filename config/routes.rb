@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :cards, except: :show
+  post 'card_check_original_text', to: 'cards#check_original_text'
 
   get 'home/index'
 
