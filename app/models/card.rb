@@ -10,7 +10,12 @@ class Card < ApplicationRecord
 
   scope :sort_by_review_date, -> { order(review_date: :desc) }
   scope :sort_by_random, -> { order('RANDOM()') }
-  scope :outdated, -> { where('review_date::date <= ?', Date.today) }
+  scope :outdated, -> { where('review_date <= ?', Date.today) }
+
+  def check_original_text_answer(answer)
+    return false unless original_text.casecmp?(answer)
+    reset_review_date
+  end
 
   def reset_review_date
     set_review_date

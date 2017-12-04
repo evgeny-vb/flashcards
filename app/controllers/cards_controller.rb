@@ -3,10 +3,10 @@
 # Controller responsible for showing and creating cards
 #
 class CardsController < ApplicationController
-  before_action :set_card, only: %i[check_original edit update destroy]
+  before_action :set_card, only: %i[check_original_text edit update destroy]
 
-  def check_original
-    if AnswerChecker.new(@card, params[:answer]).check_original_text
+  def check_original_text
+    if @card.check_original_text_answer(params[:answer])
       redirect_to home_index_path, notice: 'Правильно!'
     else
       redirect_to home_index_path, alert: "Неверно! Правильный перевод: #{@card.original_text}"
@@ -14,7 +14,7 @@ class CardsController < ApplicationController
   end
 
   def index
-    @cards = Card.all.sort_by_review_date
+    @cards = Card.sort_by_review_date
   end
 
   def new
