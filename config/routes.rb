@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  resources :cards, except: :show
+  resources :cards, except: :show do
+    collection do
+      post :check_original
+    end
+  end
 
   get 'home/index'
 

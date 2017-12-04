@@ -8,7 +8,14 @@ class Card < ApplicationRecord
 
   before_validation :set_review_date, only: :create
 
-  scope :by_review_date, -> { order(review_date: :desc) }
+  scope :sort_by_review_date, -> { order(review_date: :desc) }
+  scope :sort_by_random, -> { order('RANDOM()') }
+  scope :outdated, -> { where('review_date::date <= ?', Date.today) }
+
+  def reset_review_date
+    set_review_date
+    save!
+  end
 
   private
 

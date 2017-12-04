@@ -1,1 +1,12 @@
 <p style="font-size: 22px;">Первый в мире удобный менеджер флеш-карточек. Именно так.</p>
+<% if @card.present? %>
+  Переведенный текст: <%= @card.translated_text %>
+  <%= form_tag "/cards/check_original" do %>
+    <%= hidden_field_tag :id, @card.id %>
+    <%= label :answer, 'Оригинальный текст' %>
+    <%= text_field_tag :answer %>
+    <%= submit_tag 'Проверить' %>
+  <% end %>
+<% else %>
+  Нет карточек для проверки
+<% end %>

@@ -3,5 +3,7 @@
 # Welcomes user with root action index
 #
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @card = Card.outdated.sort_by_random.first
+  end
 end
