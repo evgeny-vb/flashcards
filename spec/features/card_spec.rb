@@ -35,5 +35,4 @@ RSpec.describe 'Checking translation' do
       expect(page).to have_content 'Неверно!'
     end
   end
-
 end
