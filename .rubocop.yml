@@ -1,6 +1,7 @@
 AllCops:
   Excludes:
     - db/**
+    - spec/**
     - config/initializers/simple_form.rb
     - config/initializers/simple_form_bootstrap.rb
 
