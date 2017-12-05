@@ -30,6 +30,6 @@ class Card < ApplicationRecord
   end
 
   def set_review_date
-    self.review_date = Date.today + 3.days
+    self.review_date = Date.today + 3.days if review_date.nil?
   end
 end
