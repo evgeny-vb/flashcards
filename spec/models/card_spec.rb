@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
-  let(:original_text) { 'Текст' }
-  let(:card) { create :card, original_text: original_text, review_date: Date.today }
+  let(:card) { create :card, original_text: 'Текст', review_date: Date.today }
 
   context '#reset_review_date' do
     let(:expected_review_date) { Date.today + 3.days }
