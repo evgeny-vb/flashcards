@@ -4,10 +4,10 @@ RSpec.describe Card, type: :model do
   let(:card) { create :card, original_text: 'Текст', review_date: Date.today }
 
   context '#reset_review_date' do
-    let(:expected_review_date) { Date.today + 3.days }
+    let(:expected_review_date) { 3.days.from_now.to_date }
 
     it 'sets review_date by 3 days from today' do
-      card.reset_review_date
+      card.reset_review_date!
       expect(card.reload.review_date).to eq(expected_review_date)
     end
   end

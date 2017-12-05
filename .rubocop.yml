@@ -1,7 +1,6 @@
 AllCops:
   Excludes:
     - db/**
-    - spec/**
     - config/initializers/simple_form.rb
     - config/initializers/simple_form_bootstrap.rb
 
@@ -9,3 +8,13 @@ Metrics/LineLength:
   Enabled: false
 Style/StringLiterals:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - spec/**/*
+
+Style/FrozenStringLiteralComment:
+    Enabled: true
+    Exclude:
+      - spec/**/*
