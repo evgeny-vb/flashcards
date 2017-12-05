@@ -29,10 +29,10 @@ class Card < ApplicationRecord
   end
 
   def set_review_date
-    self.review_date = review_date_offset if review_date.nil?
+    self.review_date = review_date_offset unless review_date
   end
 
   def review_date_offset
-    Date.today + 3.days
+    3.days.from_now.to_date
   end
 end
