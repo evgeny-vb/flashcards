@@ -4,6 +4,6 @@ FactoryBot.define do
     sequence(:translated_text) { |n| "Translated text #{n}" }
     review_date Date.today
 
-    association :user, factory: :user
+    association :user
   end
 end
