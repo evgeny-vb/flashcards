@@ -4,6 +4,7 @@
 #
 class CardsController < ApplicationController
   before_action :set_card, only: %i[check_original_text edit update destroy]
+  before_action :require_login
 
   def check_original_text
     if @card.check_original_text_answer(params[:answer])
@@ -14,7 +15,7 @@ class CardsController < ApplicationController
   end
 
   def index
-    @cards = Card.sort_by_review_date
+    @cards = current_user.cards.sort_by_review_date
   end
 
   def new
@@ -23,6 +24,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
+    @card.user_id = current_user.id
 
     if @card.save
       redirect_to cards_path

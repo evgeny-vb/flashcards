@@ -2,9 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'Checking translation' do
   let(:original_text) { 'Текст' }
-  let!(:card) { create :card, original_text: original_text, review_date: Date.today }
+  let(:user) { create :user }
+  let!(:card) { create :card, original_text: original_text, review_date: Date.today, user: user }
 
-  before { visit root_path }
+  before do
+    login(user.email, '123456')
+    visit root_path
+  end
 
   it 'should have translated text' do
     expect(page).to have_content card.translated_text
