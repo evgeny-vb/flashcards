@@ -5,7 +5,6 @@ RSpec.describe 'Checking translation' do
   let(:user) { create :user }
   let!(:card) { create :card, original_text: original_text, review_date: Date.today, user: user }
 
-
   before do
     login(user.email, '123456')
     visit root_path

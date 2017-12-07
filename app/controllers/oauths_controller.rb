@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Handles oauth authorization
+#
 class OauthsController < ApplicationController
   # sends the user on a trip to the provider,
   # and after authorizing there back to the callback url.
@@ -7,13 +11,11 @@ class OauthsController < ApplicationController
 
   def callback
     provider = auth_params[:provider]
-    if @user = login_from(provider)
+    if (@user = login_from(provider))
       redirect_to root_path, notice: "Logged in from #{provider.titleize}!"
     else
       begin
         @user = create_from(provider)
-        # NOTE: this is the place to add '@user.activate!' if you are using user_activation submodule
-
         reset_session # protect from session fixation attack
         auto_login(@user)
         redirect_to root_path, notice: "Logged in from #{provider.titleize}!"
@@ -22,7 +24,6 @@ class OauthsController < ApplicationController
       end
     end
   end
-
 
   private
 
