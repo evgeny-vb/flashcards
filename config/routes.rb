@@ -12,5 +12,9 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
+  post 'oauth/callback', to: 'oauths#callback'
+  get 'oauth/callback', to: 'oauths#callback'
+  get 'oauth/:provider', to: 'oauths#oauth', as: :auth_at_provider
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

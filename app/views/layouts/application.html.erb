@@ -30,8 +30,9 @@
                 <li class="nav-item"><%= link_to 'Добавить карточку', new_card_path %></li>
               <% else %>
                 <%= link_to 'Регистрация', new_user_path %> |
-                <%= link_to 'Логин', :login %>
-              <% end %>
+                <%= link_to 'Логин', :login %> |
+                <%= link_to 'Login with github', auth_at_provider_path(provider: :github) %>
+            <% end %>
 
             </ul>
           </div>
