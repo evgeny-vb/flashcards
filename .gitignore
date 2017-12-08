@@ -22,3 +22,6 @@
 
 .byebug_history
 .idea
+/public/system/
+.DS_Store
+public/.DS_Store
