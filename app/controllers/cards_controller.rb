@@ -4,6 +4,7 @@
 #
 class CardsController < ApplicationController
   before_action :set_card, only: %i[check_original_text edit update destroy]
+  before_action :set_pack, only: %i[new create destroy]
   before_action :require_login
 
   def check_original_text
@@ -14,19 +15,15 @@ class CardsController < ApplicationController
     end
   end
 
-  def index
-    @cards = current_user.cards.sort_by_review_date
-  end
-
   def new
     @card = Card.new
   end
 
   def create
-    @card = current_user.cards.new(card_params)
+    @card = @pack.cards.new(card_params)
 
     if @card.save
-      redirect_to cards_path
+      redirect_to @pack
     else
       render 'cards/new'
     end
@@ -36,7 +33,7 @@ class CardsController < ApplicationController
 
   def update
     if @card.update(card_params)
-      redirect_to cards_path
+      redirect_to @card.pack
     else
       render 'cards/edit'
     end
@@ -44,13 +41,17 @@ class CardsController < ApplicationController
 
   def destroy
     if @card.destroy
-      redirect_to cards_url
+      redirect_to @pack
     else
-      redirect_to cards_url, alert: 'Произошла ошибка'
+      redirect_to @pack, alert: 'Произошла ошибка'
     end
   end
 
   private
+
+  def set_pack
+    @pack = Pack.find(params[:pack_id])
+  end
 
   def set_card
     @card = Card.find(params[:id])

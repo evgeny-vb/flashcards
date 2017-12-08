@@ -26,8 +26,8 @@
               <% if current_user %>
                 <li class="nav-item"><%= link_to 'Редактироват профиль', edit_user_path(current_user.id) %></li>
                 <li class="nav-item"><%= link_to 'Выйти', :logout, method: :post %></li>
-                <li class="nav-item"><%= link_to 'Все карточки', cards_path %></li>
-                <li class="nav-item"><%= link_to 'Добавить карточку', new_card_path %></li>
+                <li class="nav-item"><%= link_to 'Все колоды', packs_path %></li>
+                <li class="nav-item"><%= link_to 'Добавить колоду', new_pack_path %></li>
               <% else %>
                 <%= link_to 'Регистрация', new_user_path %> |
                 <%= link_to 'Логин', :login %> |

@@ -1,0 +1,23 @@
+<h1>Все колоды</h1>
+<ul>
+  <table>
+    <th>Название</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <% @packs.each do |pack| %>
+      <tr class="rspec-pack">
+        <td><%= link_to pack.name, pack %></td>
+        <td>
+          <% if pack.current %>
+            Текущая
+          <% else %>
+            <%= link_to 'Сделать текущей', set_as_current_pack_path(pack.id), method: :post %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Редактировать', edit_pack_path(pack.id) %></td>
+        <td><%= link_to 'Удалить', pack, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+</ul>
