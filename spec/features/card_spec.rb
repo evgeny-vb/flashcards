@@ -10,6 +10,16 @@ RSpec.describe 'Checking translation' do
     visit root_path
   end
 
+  context 'upload image' do
+    before { visit edit_card_url(card) }
+
+    it 'can upload image' do
+      attach_file 'card_picture', 'spec/uploaders/files/image.jpg'
+      click_button 'Сохранить карточку'
+      expect(card.picture).not_to be_nil
+    end
+  end
+
   it 'should have translated text' do
     expect(page).to have_content card.translated_text
   end
