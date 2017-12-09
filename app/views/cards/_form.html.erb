@@ -2,5 +2,8 @@
   <%= f.input :original_text %>
   <%= f.input :translated_text %>
   <%= f.input :picture, as: :file %>
+  <% unless @card.new_record? %>
+    <%= f.input :review_date %>
+  <% end %>
   <%= f.submit %>
 <% end %>
