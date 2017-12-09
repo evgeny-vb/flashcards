@@ -8,6 +8,7 @@ class User < ApplicationRecord
     config.authentications_class = Authentication
   end
 
+  belongs_to :current_pack, class_name: Pack, optional: true
   has_many :packs, dependent: :destroy
   has_many :cards, through: :packs
   has_many :authentications, dependent: :destroy
@@ -19,7 +20,7 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
 
-  def current_pack
-    packs.current.first
+  def update_current_pack(pack)
+    update(current_pack_id: pack.id)
   end
 end

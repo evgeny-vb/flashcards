@@ -50,7 +50,7 @@ class CardsController < ApplicationController
   private
 
   def set_pack
-    @pack = Pack.find(params[:pack_id])
+    @pack = current_user.packs.find(params[:pack_id])
   end
 
   def set_card

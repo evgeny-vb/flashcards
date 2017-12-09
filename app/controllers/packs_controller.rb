@@ -7,14 +7,10 @@ class PacksController < ApplicationController
   before_action :require_login
 
   def set_as_current
-    if current_user == @pack.user
-      if @pack.mark_as_current_for_user
-        redirect_to packs_path
-      else
-        redirect_to packs_path, alert: 'Ошибка'
-      end
+    if current_user.update_current_pack(@pack.id)
+      redirect_to packs_path
     else
-      redirect_to packs_path, alert: 'Нельзя менять чужие колоды!'
+      redirect_to packs_path, alert: 'Ошибка'
     end
   end
 
@@ -61,7 +57,7 @@ class PacksController < ApplicationController
   private
 
   def set_pack
-    @pack = Pack.find(params[:id])
+    @pack = current_user.packs.find(params[:id])
   end
 
   def pack_params
