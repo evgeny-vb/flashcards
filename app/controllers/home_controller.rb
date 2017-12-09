@@ -4,6 +4,13 @@
 #
 class HomeController < ApplicationController
   def index
-    @card = current_user.cards.outdated.sort_by_random.first if current_user
+    return unless current_user
+    @pack = current_user.current_pack
+    @card =
+      if @pack
+        @pack.cards.outdated.sort_by_random.first
+      else
+        current_user.cards.outdated.sort_by_random.first
+      end
   end
 end

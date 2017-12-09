@@ -3,12 +3,12 @@
 # Model responsible for cards
 #
 class Card < ApplicationRecord
-  belongs_to :user
+  belongs_to :pack
 
   has_attached_file :picture, styles: { original: '360x360>' }
   validates_attachment_content_type :picture, content_type: %r{\Aimage\/.*\z}
 
-  validates :user_id, :original_text, :translated_text, :review_date, presence: true
+  validates :pack_id, :original_text, :translated_text, :review_date, presence: true
   validate :text_difference
 
   before_validation :set_review_date, only: :create

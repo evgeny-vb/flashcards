@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 # Model responsible for users on site
-# User can have many cards
+# User can have many packs
 #
 class User < ApplicationRecord
   authenticates_with_sorcery! do |config|
     config.authentications_class = Authentication
   end
 
-  has_many :cards
+  belongs_to :current_pack, class_name: Pack, optional: true
+  has_many :packs, dependent: :destroy
+  has_many :cards, through: :packs
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
@@ -17,4 +19,8 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
   validates :email, uniqueness: true, presence: true
+
+  def update_current_pack(pack)
+    update(current_pack_id: pack.id)
+  end
 end
