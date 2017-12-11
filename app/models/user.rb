@@ -8,7 +8,7 @@ class User < ApplicationRecord
     config.authentications_class = Authentication
   end
 
-  belongs_to :current_pack, class_name: Pack, optional: true
+  belongs_to :current_pack, class_name: 'Pack', optional: true
   has_many :packs, dependent: :destroy
   has_many :cards, through: :packs
   has_many :authentications, dependent: :destroy
