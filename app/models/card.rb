@@ -8,10 +8,9 @@ class Card < ApplicationRecord
   has_attached_file :picture, styles: { original: '360x360>' }
   validates_attachment_content_type :picture, content_type: %r{\Aimage\/.*\z}
 
-  after_initialize :set_defaults
-
-  validates :pack_id, :original_text, :translated_text, :review_date, presence: true
+  validates :pack_id, :original_text, :translated_text, presence: true
   validates :success_count, :fail_count, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validates :review_date, presence: true, on: :update
   validate :text_difference
 
   scope :sort_by_review_date, -> { order(review_date: :desc) }
@@ -47,12 +46,6 @@ class Card < ApplicationRecord
     end
     save!
     false
-  end
-
-  def set_defaults
-    self.review_date   ||= Date.today
-    self.success_count ||= 0
-    self.fail_count    ||= 0
   end
 
   def text_difference

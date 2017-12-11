@@ -4,7 +4,7 @@
 #
 class CardsController < ApplicationController
   before_action :set_card, only: %i[check_original_text edit update destroy]
-  before_action :set_pack, only: %i[new create destroy]
+  before_action :set_pack, only: %i[new create]
   before_action :require_login
 
   def check_original_text
@@ -41,9 +41,9 @@ class CardsController < ApplicationController
 
   def destroy
     if @card.destroy
-      redirect_to @pack
+      redirect_to @card.pack
     else
-      redirect_to @pack, alert: 'Произошла ошибка'
+      redirect_to @card.pack, alert: 'Произошла ошибка'
     end
   end
 
