@@ -8,36 +8,59 @@ class Card < ApplicationRecord
   has_attached_file :picture, styles: { original: '360x360>' }
   validates_attachment_content_type :picture, content_type: %r{\Aimage\/.*\z}
 
-  validates :pack_id, :original_text, :translated_text, :review_date, presence: true
-  validate :text_difference
+  after_initialize :set_defaults
 
-  before_validation :set_review_date, only: :create
+  validates :pack_id, :original_text, :translated_text, :review_date, presence: true
+  validates :success_count, :fail_count, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validate :text_difference
 
   scope :sort_by_review_date, -> { order(review_date: :desc) }
   scope :sort_by_random, -> { order('RANDOM()') }
-  scope :outdated, -> { where('review_date <= ?', Date.today) }
+  scope :outdated, -> { where('review_date <= ?', Time.now) }
+
+  OFFSET_COLLECTION = [12.hours, 3.days, 1.week, 2.weeks, 1.month].freeze
 
   def check_original_text_answer(answer)
-    return false unless original_text.casecmp?(answer)
-    reset_review_date!
-  end
-
-  def reset_review_date!
-    update!(review_date: review_date_offset)
+    original_answer_correct?(answer) ? successful_attempt : failed_attempt
   end
 
   private
+
+  def original_answer_correct?(answer)
+    original_text.casecmp?(answer)
+  end
+
+  def successful_attempt
+    self.review_date   = review_date_offset
+    self.success_count += 1
+    self.fail_count    = 0
+    save!
+  end
+
+  def failed_attempt
+    if fail_count == 2
+      self.success_count = 0
+      self.fail_count    = 0
+      self.review_date   = review_date_offset
+    else
+      self.fail_count += 1
+    end
+    save!
+    false
+  end
+
+  def set_defaults
+    self.review_date   ||= Date.today
+    self.success_count ||= 0
+    self.fail_count    ||= 0
+  end
 
   def text_difference
     return unless original_text.casecmp?(translated_text)
     errors.add(:translated_text, 'Оригинальный и переведенный текст не могут быть одинаковыми')
   end
 
-  def set_review_date
-    self.review_date = review_date_offset unless review_date
-  end
-
   def review_date_offset
-    3.days.from_now.to_date
+    (OFFSET_COLLECTION[success_count] || OFFSET_COLLECTION.last).from_now
   end
 end
