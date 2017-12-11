@@ -4,7 +4,7 @@ RSpec.describe 'Card' do
   let(:original_text) { 'Текст' }
   let(:user) { create :user }
   let(:pack) { create :pack, user: user }
-  let!(:card) { create :card, original_text: original_text, review_date: Date.today, pack: pack }
+  let!(:card) { create :card, original_text: original_text, review_date: Time.now, pack: pack }
 
   before do
     login(user.email, '123456')
