@@ -39,7 +39,7 @@ class Card < ApplicationRecord
   end
 
   def answer_typo?(answer)
-    LevenshteinDistance.calculate(original_text.downcase, answer.downcase) == 1
+    Levenshtein.distance(original_text.downcase, answer.downcase) == 1
   end
 
   def successful_attempt
