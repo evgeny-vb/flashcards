@@ -17,9 +17,9 @@ RSpec.describe Card, type: :model do
       context 'when answer is correct' do
         let(:answer) { 'Текст' }
         let(:correct_answers) { %w[Текст текст текСТ] }
-        it 'should return true' do
+        it 'should return correct_code' do
           correct_answers.each do |answ|
-            expect(card.check_original_text_answer(answ)).to be true
+            expect(card.check_original_text_answer(answ)).to be Card::RESULT_CODES[:correct]
           end
         end
 
@@ -34,12 +34,22 @@ RSpec.describe Card, type: :model do
         end
       end
 
-      context 'when answer is incorrect' do
-        let(:answer) { 'Тексд' }
+      context 'when typo in answer' do
         let(:incorrect_answers) { %w[Тексд екст] }
-        it 'should return false' do
+
+        it 'should return wrong_code' do
           incorrect_answers.each do |answ|
-            expect(card.check_original_text_answer(answ)).to be false
+            expect(card.check_original_text_answer(answ)).to be Card::RESULT_CODES[:typo]
+          end
+        end
+      end
+
+      context 'when answer is incorrect' do
+        let(:answer) { 'Текзд' }
+        let(:incorrect_answers) { %w[Текзд егст] }
+        it 'should return wrong_code' do
+          incorrect_answers.each do |answ|
+            expect(card.check_original_text_answer(answ)).to be Card::RESULT_CODES[:wrong]
           end
         end
 

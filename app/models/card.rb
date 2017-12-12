@@ -18,15 +18,28 @@ class Card < ApplicationRecord
   scope :outdated, -> { where('review_date <= ?', Time.now) }
 
   OFFSET_COLLECTION = [12.hours, 3.days, 1.week, 2.weeks, 1.month].freeze
+  RESULT_CODES = { correct: 1, wrong: 2, typo: 3 }.freeze
 
   def check_original_text_answer(answer)
-    original_answer_correct?(answer) ? successful_attempt : failed_attempt
+    if answer_correct?(answer)
+      successful_attempt
+      RESULT_CODES[:correct]
+    elsif answer_typo?(answer)
+      RESULT_CODES[:typo]
+    else
+      failed_attempt
+      RESULT_CODES[:wrong]
+    end
   end
 
   private
 
-  def original_answer_correct?(answer)
+  def answer_correct?(answer)
     original_text.casecmp?(answer)
+  end
+
+  def answer_typo?(answer)
+    Levenshtein.distance(original_text.downcase, answer.downcase) == 1
   end
 
   def successful_attempt
@@ -45,7 +58,6 @@ class Card < ApplicationRecord
       self.fail_count += 1
     end
     save!
-    false
   end
 
   def text_difference
