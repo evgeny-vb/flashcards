@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
 
+  scope :with_pending_cards, -> { where(id: Card.joins(:pack).select(:user_id).outdated) }
+
   def update_current_pack(pack)
     update(current_pack_id: pack.id)
   end
