@@ -7,5 +7,4 @@ namespace :mailers do
       CardsMailer.pending_cards_notification(user)
     end
   end
-
 end
