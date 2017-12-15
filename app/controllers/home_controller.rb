@@ -13,4 +13,8 @@ class HomeController < ApplicationController
         current_user.cards.outdated.sort_by_random.first
       end
   end
+
+  def locale
+    redirect_to root_path(locale: params[:locale])
+  end
 end

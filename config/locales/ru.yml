@@ -1,0 +1,28 @@
+ru:
+  flashcarder: 'Флэшкарточкер'
+  registration: 'Регистрация'
+  login: 'Вход'
+  login_github: 'Зайти через Github'
+  edit_profile: 'Редактироват профиль'
+  logout: 'Выйти'
+  edit: 'Редактировать'
+  delete: 'Удалить'
+  confirm: 'Вы уверены?'
+  name: 'Имя'
+  home:
+    welcome: 'Первый в мире удобный менеджер флеш-карточек. Именно так.'
+    no_cards: 'Нет карточек для проверки'
+    in_current_deck: 'в текущей колоде'
+    check: 'Проверить'
+  packs:
+    add: 'Добавить колоду'
+    edit: 'Редактировать колоду'
+    all: 'Все колоды'
+    current: 'Текущая'
+    set_current: 'Сделать текущей'
+  cards:
+    add: 'Добавить карточку'
+    edit: 'Редактировать карточку'
+    translated_text: 'Переведенный текст'
+    original_text: 'Оригинальный текст'
+    review_date: 'Дата пересмотра'

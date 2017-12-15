@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'card_check_original_text', to: 'cards#check_original_text'
 
   get 'home/index'
+  put 'home/locale'
 
   post 'oauth/callback', to: 'oauths#callback'
   get 'oauth/callback', to: 'oauths#callback'

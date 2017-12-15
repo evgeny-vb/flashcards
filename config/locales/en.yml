@@ -30,4 +30,30 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  flashcarder: 'Flashcarder'
+  registration: 'Registration'
+  login: 'Login'
+  login_github: 'Login with Github'
+  edit_profile: 'Edit profile'
+  logout: 'Logout'
+  edit: 'Edit'
+  delete: 'Delete'
+  confirm: 'Are you sure?'
+  name: 'Name'
+  home:
+    welcome: "Fist world handy flashcard manager. That's right"
+    no_cards: 'No card for review'
+    in_current_deck: 'in current deck'
+    check: 'Check'
+  packs:
+    add: 'Add deck'
+    edit: 'Edit deck'
+    all: 'All decks'
+    current: 'Current'
+    set_current: 'Set current'
+  cards:
+    add: 'Add card'
+    edit: 'Edit card'
+    translated_text: 'Translated text'
+    original_text: 'Original text'
+    review_date: 'Review date'

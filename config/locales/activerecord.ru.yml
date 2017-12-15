@@ -5,3 +5,9 @@ ru:
         original_text: 'Оригинальный текст'
         translated_text: 'Переведённый текст'
         review_date: 'Дата пересмотра'
+      pack:
+        name: 'Имя'
+      user:
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        locale: 'Язык'

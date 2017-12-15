@@ -1,7 +1,7 @@
-<h1>Все колоды</h1>
+<h1><%= t('packs.all') %></h1>
 <ul>
   <table>
-    <th>Название</th>
+    <th><%= t('name') %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,13 +10,13 @@
         <td><%= link_to pack.name, pack %></td>
         <td>
           <% if current_user.current_pack == pack %>
-            Текущая
+            <%= t('packs.current') %>
           <% else %>
-            <%= link_to 'Сделать текущей', set_as_current_pack_path(pack.id), method: :post %>
+            <%= link_to t('packs.set_current'), set_as_current_pack_path(pack.id), method: :post %>
           <% end %>
         </td>
-        <td><%= link_to 'Редактировать', edit_pack_path(pack.id) %></td>
-        <td><%= link_to 'Удалить', pack, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        <td><%= link_to t('edit'), edit_pack_path(pack.id) %></td>
+        <td><%= link_to t('delete'), pack, method: :delete, data: { confirm: t('confirm') } %></td>
       </tr>
     <% end %>
   </table>
