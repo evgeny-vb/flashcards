@@ -20,18 +20,23 @@
         <nav class="navbar navbar-default navbar-expand-md">
           <div class="container-fluid">
             <div class="navbar-header">
-              <h1><%= link_to 'Флэшкарточкер', home_index_path %></h1>
+              <h1><%= link_to t('flashcarder'), home_index_path %></h1>
             </div>
             <ul class="navbar-nav navigation-links">
               <% if current_user %>
-                <li class="nav-item"><%= link_to 'Редактироват профиль', edit_user_path(current_user.id) %></li>
-                <li class="nav-item"><%= link_to 'Выйти', :logout, method: :post %></li>
-                <li class="nav-item"><%= link_to 'Все колоды', packs_path %></li>
-                <li class="nav-item"><%= link_to 'Добавить колоду', new_pack_path %></li>
+                <li class="nav-item"><%= link_to t('edit_profile'), edit_user_path(current_user.id) %></li>
+                <li class="nav-item"><%= link_to t('logout'), :logout, method: :post %></li>
+                <li class="nav-item"><%= link_to t('packs.all'), packs_path %></li>
+                <li class="nav-item"><%= link_to t('packs.add'), new_pack_path %></li>
               <% else %>
-                <%= link_to 'Регистрация', new_user_path %> |
-                <%= link_to 'Логин', :login %> |
-                <%= link_to 'Login with github', auth_at_provider_path(provider: :github) %>
+                <%= link_to t('registration'), new_user_path %> |
+                <%= link_to t('login'), :login %> |
+                <%= link_to t('login_github'), auth_at_provider_path(provider: :github) %> |
+                <% if I18n.locale == :ru %>
+                  <%= link_to 'RU', home_locale_path(locale: 'en'), method: :put %>
+                <% else %>
+                  <%= link_to 'EN', home_locale_path(locale: 'ru'), method: :put %>
+                <% end %>
             <% end %>
 
             </ul>

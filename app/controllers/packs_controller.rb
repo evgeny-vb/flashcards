@@ -7,7 +7,7 @@ class PacksController < ApplicationController
   before_action :require_login
 
   def set_as_current
-    if current_user.update_current_pack(@pack.id)
+    if current_user.update_current_pack(@pack)
       redirect_to packs_path
     else
       redirect_to packs_path, alert: 'Ошибка'

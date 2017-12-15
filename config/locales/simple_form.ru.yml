@@ -15,6 +15,11 @@ ru:
       card:
         create: 'Создать карточку'
         update: 'Сохранить карточку'
+      pack:
+        create: 'Создать колоду'
+        update: 'Сохранить колоду'
+      user:
+        update: 'Сохранить'
     # Examples
     # labels:
     #   defaults:
