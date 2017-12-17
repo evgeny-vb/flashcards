@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214224508) do
+ActiveRecord::Schema.define(version: 20171216090652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20171214224508) do
     t.bigint "pack_id"
     t.integer "success_count", default: 0, null: false
     t.integer "fail_count", default: 0, null: false
+    t.float "e_factor", default: 1.3
+    t.integer "days_offset", default: 1
     t.index ["pack_id"], name: "index_cards_on_pack_id"
   end
 
