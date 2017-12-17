@@ -23,6 +23,6 @@
 
 every 1.days do
   User.with_pending_cards.each do |user|
-    CardsMailer.pending_cards_notification(user)
+    CardsMailer.pending_cards_notification(user).deliver
   end
 end
