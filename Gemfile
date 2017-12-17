@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'rollbar'
+gem 'newrelic_rpm'
 
 gem 'rails-i18n'
 gem 'http_accept_language'
