@@ -60,7 +60,7 @@ RSpec.describe AnswerChecker do
           it 'resets success_count and review_date' do
             expect { AnswerChecker.new(card, answer).check_original_text_answer }
               .to change(card, :success_count).to(0)
-                    .and change(card, :review_date).to review_offset
+              .and change(card, :review_date).to review_offset
           end
         end
       end

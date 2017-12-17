@@ -7,7 +7,6 @@ RSpec.describe SuperMemo do
     let(:card_1_success) { create :card }
     let(:card_2_success) { create :card, success_count: 1 }
 
-
     it { expect(SuperMemo.new(card_1_success).days_offset).to eq(1) }
     it { expect(SuperMemo.new(card_2_success).days_offset).to eq(6) }
 
