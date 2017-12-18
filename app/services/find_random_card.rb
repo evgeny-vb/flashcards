@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+## Service for getting random card from pack or from all user cards
+#
 class FindRandomCard
   def initialize(user, pack)
     @user = user
