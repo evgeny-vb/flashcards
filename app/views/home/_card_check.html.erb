@@ -1,0 +1,16 @@
+<%= @message if @message %>
+<br>
+<% if @card.present? %>
+  <% if @card.picture.present? %>
+    <%= image_tag @card.picture.url %>
+  <% end %>
+  <%= t('cards.translated_text') %>: <%= @card.translated_text %>
+  <%= form_tag card_check_original_text_path, class: 'spec-answer-form', remote: true do %>
+    <%= hidden_field_tag :id, @card.id %>
+    <%= label :answer, t('cards.original_text') %>
+    <%= text_field_tag :answer %>
+    <%= submit_tag t('home.check') %>
+  <% end %>
+<% else %>
+  <%= t('home.no_cards') %> <%= @pack ? t('home.in_current_deck') : '' %>
+<% end %>
