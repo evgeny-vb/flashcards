@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Pack' do
+RSpec.describe 'Pack', type: :feature do
   let(:user) { create :user }
   let(:pack) { create :pack, user: user }
 

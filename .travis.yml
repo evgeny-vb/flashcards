@@ -2,9 +2,18 @@ language: ruby
 rvm:
   - 2.4
 
+env:
+  - MOZ_HEADLESS=1
+addons:
+  firefox: latest
+
 services:
   - postgresql
 
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v0.19.1-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver

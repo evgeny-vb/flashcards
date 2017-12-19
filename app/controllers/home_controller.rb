@@ -6,12 +6,7 @@ class HomeController < ApplicationController
   def index
     return unless current_user
     @pack = current_user.current_pack
-    @card =
-      if @pack
-        @pack.cards.outdated.sort_by_random.first
-      else
-        current_user.cards.outdated.sort_by_random.first
-      end
+    @card = FindRandomCard.call(current_user, @pack)
   end
 
   def locale

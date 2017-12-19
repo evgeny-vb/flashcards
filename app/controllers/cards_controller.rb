@@ -8,14 +8,13 @@ class CardsController < ApplicationController
   before_action :require_login
 
   def check_original_text
-    case AnswerChecker.new(@card, params[:answer]).check_original_text_answer
-    when AnswerChecker::RESULT_CODES[:correct]
-      redirect_to home_index_path, notice: 'Правильно!'
-    when AnswerChecker::RESULT_CODES[:typo]
-      redirect_to home_index_path, alert: "Неверно! Возможно вы допустили опечатку.
-        Правильный перевод: #{@card.original_text}. Вы ввели: #{params[:answer]}"
-    when AnswerChecker::RESULT_CODES[:wrong]
-      redirect_to home_index_path, alert: "Неверно! Правильный перевод: #{@card.original_text}"
+    @message = AnswerChecker.new(@card, params[:answer]).result_message
+    @pack    = current_user.current_pack
+    @card    = FindRandomCard.call(current_user, @pack)
+
+    respond_to do |format|
+      format.html { render partial: 'home/card_check' }
+      format.js {}
     end
   end
 

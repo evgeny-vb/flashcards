@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Card' do
+RSpec.describe 'Card', type: :feature do
   let(:original_text) { 'Текст' }
   let(:user) { create :user }
   let(:pack) { create :pack, user: user }
@@ -21,7 +21,7 @@ RSpec.describe 'Card' do
     end
   end
 
-  context 'checking translation' do
+  context 'checking translation', js: true do
     it 'should have translated text' do
       expect(page).to have_content card.translated_text
     end
@@ -34,6 +34,7 @@ RSpec.describe 'Card' do
       it 'should show success message' do
         fill_in 'answer', with: original_text
         click_button 'Проверить'
+        wait_for_ajax
         expect(page).to have_content 'Правильно!'
       end
     end
@@ -42,6 +43,7 @@ RSpec.describe 'Card' do
       it 'should show success message' do
         fill_in 'answer', with: 'incorrect'
         click_button 'Проверить'
+        wait_for_ajax
         expect(page).to have_content 'Неверно!'
       end
     end

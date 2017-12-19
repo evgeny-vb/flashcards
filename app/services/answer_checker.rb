@@ -12,6 +12,18 @@ class AnswerChecker
     @answer = answer
   end
 
+  def result_message
+    case check_original_text_answer
+    when RESULT_CODES[:correct]
+      'Правильно!'
+    when RESULT_CODES[:typo]
+      "Неверно! Возможно вы допустили опечатку.
+        Правильный перевод: #{card.original_text}. Вы ввели: #{answer}"
+    when RESULT_CODES[:wrong]
+      "Неверно! Правильный перевод: #{card.original_text}"
+    end
+  end
+
   def check_original_text_answer
     if answer_correct?
       successful_attempt
@@ -36,7 +48,7 @@ class AnswerChecker
 
   def successful_attempt
     update_review_date(true)
-    card.fail_count = 0
+    card.fail_count    = 0
     card.success_count += 1
     card.save!
   end
