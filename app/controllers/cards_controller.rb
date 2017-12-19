@@ -10,7 +10,7 @@ class CardsController < ApplicationController
   def check_original_text
     @message = AnswerChecker.new(@card, params[:answer]).result_message
     @pack    = current_user.current_pack
-    @card    = FindRandomCard.new(current_user, @pack).call
+    @card    = FindRandomCard.call(current_user, @pack)
 
     respond_to do |format|
       format.html { render partial: 'home/card_check' }
