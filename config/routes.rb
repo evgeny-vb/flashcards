@@ -7,13 +7,15 @@ Rails.application.routes.draw do
   get 'login', to: 'user_sessions#new', as: :login
   post 'logout', to: 'user_sessions#destroy', as: :logout
 
-  resources :packs do
-    member do
-      post 'set_as_current'
+  scope '/dashboard' do
+    resources :packs do
+      member do
+        post 'set_as_current'
+      end
+      resources :cards, shallow: true, except: %i[index show]
     end
-    resources :cards, shallow: true, except: %i[index show]
+    post 'card_check_original_text', to: 'cards#check_original_text'
   end
-  post 'card_check_original_text', to: 'cards#check_original_text'
 
   get 'home/index'
   put 'home/locale'
